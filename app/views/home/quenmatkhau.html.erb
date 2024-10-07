@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #main{
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        align-items: center;
+        margin-top: -180px;
+    }
+    #quenmatkhau{
+        background-color: #e6e5e5;
+        border-radius: 10px;
+        padding: 50px;
+        width: 500px;
+        box-shadow: 0 4px 10px rgba(196, 18, 18, 0.1);
+    }
+    h2{
+        text-align: center;
+        margin: 0;
+    }
+    input[type="email"],input[type="text"]{
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        width: 92%;
+    }
+    td{
+        padding: 10px 0;
+    }
+    #nhan{
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+
+    }
+    #nhan:hover{
+        background-color: #45a049;
+    }
+    #gui{
+        border: 1px rgb(141, 139, 139) solid;
+        padding: 10px;
+        background-color: #ddd;
+        color: #555454;
+    }
+    #gui:hover{
+       background-color: #a1a1a1;
+       color:white
+    }
+    #quaylaidangnhap {
+        text-align: center;
+    }
+
+</style>
+<body>
+    <%= render 'header' %>
+        <form action="/quenmatkhau" id="main">
+            <div>
+                <table id="quenmatkhau">
+                    <tr>
+                        <td colspan="3">
+                            <h2> QUÊN MẬT KHẨU</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Nhập Email:</td>
+                        <td colspan="3"> <input type="email" name="email" placeholder="Nhập email khôi phục"></td>
+                    </tr>
+                    <tr>
+                        <td> Nhập mã:</td>
+                        <td> <input type="text" name="verification_code" placeholder="Nhập mã"></td>
+                        <td> <button type="submit" id="gui">Gửi mã</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"> <button type="submit" id="nhan"> Lấy lại mật khẩu</button></td>
+                    </tr>
+                    <tr id="quaylaidangnhap" >
+                        <td colspan="3"> <a href="/" >Quay lại trang đăng nhập</a></td>
+                    </tr>
+                    <tr id="quaylaidangnhap" >
+                        <td colspan="3"> <a href="/laylaimatkhau" >Qau trang lấy mật khẩu test </a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+</body>
+</html>
