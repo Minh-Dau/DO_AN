@@ -32,30 +32,4 @@ class HomeController < ApplicationController
       render :register
     end
   end
-
-  def show
-    firebase_service = FirebaseService.new
-    user_id = params[:id]
-
-    if user_id.blank?
-      render json: { message: "User ID không hợp lệ" }, status: :unprocessable_entity
-      return
-    end
-
-    begin
-      user = firebase_service.get_user(user_id)
-      if user.nil? || user.body.nil?
-        render json: { message: "Người dùng không tồn tại" }, status: :not_found
-      else
-        render json: user.body, status: :ok
-      end
-    rescue => e
-      render json: { message: "Có lỗi xảy ra: #{e.message}" }, status: :internal_server_error
-    end
-  end
-
-
-
-
-  
 end

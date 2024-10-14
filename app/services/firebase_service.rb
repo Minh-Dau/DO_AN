@@ -45,6 +45,18 @@ class FirebaseService
     end
     nil # Trả về nil nếu không tìm thấy người dùng
   end
+  def find_user_by_id(user_id)
+    path = "nguoidung/#{user_id}"
+    response = @firebase.get(path)
+  
+    Rails.logger.debug("Response for user_id #{user_id}: #{response.inspect}") # Debugging
+  
+    if response.success?
+      return { id: user_id, data: response.body }
+    end
+    nil
+  end
+  
 
   def create_user(data)
     # Băm mật khẩu trước khi lưu

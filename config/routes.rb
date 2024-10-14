@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: :logout
 
+   get 'show', to: 'sessions#show', as: 'show'
+
   # Default root route to login
   root "home#register"
 end

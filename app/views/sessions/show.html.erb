@@ -1,0 +1,12 @@
+<%= form_with url: show_path, method: :post do %>
+  <% if @user %>
+    <h1>Chào mừng, <%= @user[:data]["username"] %>!</h1>
+    <p>Email: <%= @user[:data]["email"] %></p>
+    <p>Số điện thoại: <%= @user[:data]["sodienthoai"] %></p>
+    <p>Địa chỉ: <%= @user[:data]["dia_chi"] || 'Chưa có thông tin' %></p>
+  <% else %>
+    <h1>Người dùng không tồn tại</h1>
+  <% end %>
+<% end %>
+
+<%= link_to 'Đăng xuất', logout_path, method: :delete, data: { confirm: "Bạn có chắc chắn muốn đăng xuất?" } %>
