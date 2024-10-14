@@ -10,3 +10,9 @@
 <% end %>
 
 <%= link_to 'Đăng xuất', logout_path, method: :delete, data: { confirm: "Bạn có chắc chắn muốn đăng xuất?" } %>
+
+<% if flash[:notice] %>
+  <script>
+    alert("<%= flash[:notice] %>");
+  </script>
+<% end %>

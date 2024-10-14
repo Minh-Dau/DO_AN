@@ -32,7 +32,7 @@ class FirebaseService
     response = @firebase.delete(path)
     response
   end
-
+  
   def find_user_by_email(email)
     path = "nguoidung"
     response = @firebase.get(path)
@@ -56,7 +56,11 @@ class FirebaseService
     end
     nil
   end
-  
+  def destroy
+    Rails.logger.debug("Logging out user ID: #{session[:user_id]}")
+    session[:user_id] = nil
+    redirect_to login_path, notice: 'Đã đăng xuất.'
+  end  
 
   def create_user(data)
     # Băm mật khẩu trước khi lưu

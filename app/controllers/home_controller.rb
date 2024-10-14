@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def register
     # Renders the registration form
   end
-
+  ## tạo người dùng
   def create
     firebase_service = FirebaseService.new
     user_data = {
@@ -18,18 +18,19 @@ class HomeController < ApplicationController
       trang_thai: true,
       ngay_cap_nhat: Time.now.utc.iso8601
     }
-
+  
     begin
       result = firebase_service.create_user(user_data)
       if result.success?
-        redirect_to login_path, notice: "Đăng ký thành công!"
+        flash[:notice] = "Đăng ký thành công!"
+        redirect_to login_path
       else
-        @message = "Đăng ký không thành công. Vui lòng thử lại."
+        flash[:alert] = "Đăng ký không thành công. Vui lòng thử lại."
         render :register
       end
     rescue => e
-      @message = "Có lỗi xảy ra: #{e.message}"
+      flash[:alert] = "Có lỗi xảy ra: #{e.message}"
       render :register
     end
-  end
+  end  
 end

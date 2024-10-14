@@ -18,12 +18,13 @@ Rails.application.routes.draw do
   post "quenmatkhau", to: "home#quenmatkhau_submit"
 
   # Login and Logout routes
-  get "login", to: "sessions#new", as: :login
+  get "login", to: "home#login", as: :login
   post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy", as: :logout
 
-   get 'show', to: 'sessions#show', as: 'show'
+  get 'show', to: 'sessions#show', as: 'show'
+
+  delete 'logout', to: 'sessions#destroy', as: :logout
 
   # Default root route to login
-  root "home#register"
+  root "home#login"
 end

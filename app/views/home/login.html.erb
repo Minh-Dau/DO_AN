@@ -82,6 +82,7 @@
 <body>
     <%= render 'header' %>
     <form action="/login" id="main" method="POST">
+        <%= form_with url: show_path, method: :post do %>
         <div>
             <table id="dangnhap">
                 <tr>
@@ -102,11 +103,11 @@
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" placeholder="Nhập email" id="email" name="email" required></td>
+                    <td><input type="text" placeholder="Nhập email" id="email" name="email" required :email, params[:email]></td>
                 </tr>
                 <tr>
                     <td>Mật khẩu:</td>
-                    <td><input type="password" placeholder="Nhập mật khẩu" id="password" name="password" required></td>
+                    <td><input type="password" placeholder="Nhập mật khẩu" id="password" name="password" required  :password ></td>
                 </tr>
                 <tr>
                     <td colspan="2" id="checkone">
@@ -120,7 +121,7 @@
                     <td colspan="2"> Quên mật khẩu? Nhấn vào <a href="/quenmatkhau">đây</a></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> <button type="submit" id="nhan">Đăng Nhập</button></td>
+                    <td colspan="2"> <button type="submit" id="nhan" submit_tag >Đăng Nhập</button></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="dangnhapgg"> Hoặc đăng nhập bằng</td>
@@ -130,6 +131,7 @@
                 </tr>
             </table>
         </div>
+        <% end %>
     </form>
     <script>
         document.getElementById('hienthi').addEventListener('change', function() {
@@ -141,5 +143,14 @@
             }
         });
     </script>
+    <% if flash[:notice] %>
+        <script>
+            alert("<%= j flash[:notice] %>");
+        </script>
+    <% elsif flash[:alert] %>
+        <script>
+            alert("<%= j flash[:alert] %>");
+        </script>
+    <% end %>
 </body>
 </html>

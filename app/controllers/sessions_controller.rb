@@ -19,11 +19,6 @@ class SessionsController < ApplicationController
       render :new
     end
   end
-  def destroy
-    # Xóa session khi đăng xuất
-    session[:user_id] = nil
-    redirect_to login_path, notice: 'Đã đăng xuất.'
-  end
   def show
     firebase = FirebaseService.new
   
@@ -35,7 +30,10 @@ class SessionsController < ApplicationController
       redirect_to login_path, alert: "Bạn cần đăng nhập để truy cập trang này."
     end
   end
-  
-  
+  def destroy
+    Rails.logger.debug("Logging out user ID: #{session[:user_id]}") # Debugging log
+    session[:user_id] = nil
+    redirect_to login_path, notice: 'Đã đăng xuất.'
+  end
 end
 
