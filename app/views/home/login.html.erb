@@ -81,7 +81,7 @@
 </style>
 <body>
     <%= render 'header' %>
-    <form action="/login" id="main"  method="POST">
+    <form action="/login" id="main" method="POST">
         <div>
             <table id="dangnhap">
                 <tr>
@@ -101,26 +101,22 @@
                     <% end %></td>
                 </tr>
                 <tr>
-                    <td>
-                        Tài Khoản:
-                    </td>
-                    <td>
-                        <input type="text" placeholder="Nhập tài khoản" id="username" name="username" required>
-                    </td>
+                    <td>Email:</td>
+                    <td><input type="text" placeholder="Nhập email" id="email" name="email" required></td>
                 </tr>
                 <tr>
-                    <td> Mật khẩu:</td>
+                    <td>Mật khẩu:</td>
                     <td><input type="password" placeholder="Nhập mật khẩu" id="password" name="password" required></td>
                 </tr>
                 <tr>
                     <td colspan="2" id="checkone">
                         <div class="checkbox-container" id="check">
                             <input type="checkbox" id="hienthi">
-                            <label for="check">Hiển thị mật khẩu</label>
+                            <label for="hienthi">Hiển thị mật khẩu</label>
                         </div>
                     </td>
                 </tr>
-                <tr >
+                <tr>
                     <td colspan="2"> Quên mật khẩu? Nhấn vào <a href="/quenmatkhau">đây</a></td>
                 </tr>
                 <tr>
@@ -138,13 +134,10 @@
     <script>
         document.getElementById('hienthi').addEventListener('change', function() {
             const passwordField = document.getElementById('password');
-            const repasswordField = document.getElementById('repassword');
             if (this.checked) {
-                passwordField.type = 'text';
-                repasswordField.type = 'text';
+                passwordField.type = 'text'; 
             } else {
                 passwordField.type = 'password';
-                repasswordField.type = 'password';
             }
         });
     </script>

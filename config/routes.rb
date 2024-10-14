@@ -1,27 +1,27 @@
 Rails.application.routes.draw do
   # Health check route
-  get "up" => "rails/health#show", as: :rails_health_check
+  get "up", to: "rails/health#show", as: :rails_health_check
 
   # PWA routes
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker", to: "rails/pwa#service_worker", as: :pwa_service_worker
+  get "manifest", to: "rails/pwa#manifest", as: :pwa_manifest
 
-  # Authentication routes
-  get "login", to: "home#login", as: "login"
-  post "login", to: "home#login_process", as: "login_process"
-  # Registration routes
-  get "register", to: "home#register", as: "register"
-  post "register", to: "home#create", as: "register_create"
+  # User registration routes
+  get "register", to: "home#register", as: :register
+  post "register", to: "home#create", as: :register_create
 
-  get "laylaimatkhau", to:"home#laylaimatkhau", as:"laylaimatkhau"
-  post "laylaimatkhau", to:"home#laylaimatkhau"
+  # Password recovery routes
+  get "laylaimatkhau", to: "home#laylaimatkhau", as: :password_reset_request
+  post "laylaimatkhau", to: "home#laylaimatkhau_submit"
 
-  get "quenmatkhau", to:"home#quenmatkhau", as:"quenmatkhau"
-  post "quenmatkhau", to:"home#quenmatkhau"
+  get "quenmatkhau", to: "home#quenmatkhau", as: :password_recovery
+  post "quenmatkhau", to: "home#quenmatkhau_submit"
 
-  # Route for the home action
-  get "home", to: "home#home", as: "home"
+  # Login and Logout routes
+  get "login", to: "sessions#new", as: :login
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy", as: :logout
 
-  # Default route to login
-  root "home#login"
+  # Default root route to login
+  root "home#register"
 end
