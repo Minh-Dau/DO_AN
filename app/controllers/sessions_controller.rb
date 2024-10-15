@@ -1,24 +1,35 @@
 require 'bcrypt'
 
 class SessionsController < ApplicationController
+  def login
+  end
   def create
     firebase = FirebaseService.new
-
-    # Tìm người dùng theo email (hoặc bạn có thể dùng 'tai_khoan')
+  
+    # Find user by email
     user = firebase.find_user_by_email(params[:email])
-
+  
     if user
       user_data = user[:data]
-
-      # Đăng nhập thành công, lưu thông tin vào session
-      session[:user_id] = user_data["id"]
-      redirect_to show_path, notice: 'Đăng nhập thành công!'
+  
+      # Check password
+      if params[:password] == user_data["password"]
+        # Successful login
+        session[:user_id] = user_data["id"]
+        redirect_to show_path, notice: 'Đăng nhập thành công!'
+      else
+        # Incorrect password
+        @message = 'Mật khẩu không chính xác.'
+        render :login, status: :unprocessable_entity
+      end
     else
-      # Thông báo lỗi nếu không tìm thấy người dùng
-      flash.now[:alert] = 'Email không tồn tại.'
-      render :new
+      # User not found
+      @message = 'Email không tồn tại.'
+      render :login, status: :unprocessable_entity
     end
   end
+  
+
   def show
     firebase = FirebaseService.new
   
