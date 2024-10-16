@@ -5,30 +5,21 @@ class SessionsController < ApplicationController
   end
   def create
     firebase = FirebaseService.new
-  
-    # Find user by email
     user = firebase.find_user_by_email(params[:email])
-  
+
     if user
       user_data = user[:data]
-  
-      # Check password
+
       if params[:password] == user_data["password"]
-        # Successful login
         session[:user_id] = user_data["id"]
-        redirect_to show_path, notice: 'Đăng nhập thành công!'
+        render json: { success: true, message: 'Đăng nhập thành công.' }
       else
-        # Incorrect password
-        @message = 'Mật khẩu không chính xác.'
-        render :login, status: :unprocessable_entity
+        render json: { success: false, message: 'Mật khẩu không chính xác.' }, status: :unprocessable_entity
       end
     else
-      # User not found
-      @message = 'Email không tồn tại.'
-      render :login, status: :unprocessable_entity
+      render json: { success: false, message: 'Email không tồn tại.' }, status: :unprocessable_entity
     end
   end
-  
 
   def show
     firebase = FirebaseService.new
