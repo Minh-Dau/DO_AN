@@ -93,7 +93,7 @@
 </style>
 <body>
     <%= render 'header' %>
-    <form action="/login" id="main" method="POST">
+    <form action="/login" id="main" method="POST" >
         <%= form_with url: login_path, method: :post, html: { id: 'login-form' } do |f| %>
             <div>
                 <table id="dangnhap">
@@ -153,39 +153,39 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  // Listen for form submission using remote AJAX
-  document.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission
+    // Listen for form submission using remote AJAX
+    document.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-    const form = event.target;
-    const formData = new FormData(form);
+        const form = event.target;
+        const formData = new FormData(form);
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        Swal.fire({
-          title: "Good job!",
-          text: data.message,
-          icon: "success"
-        }).then(() => {
-          window.location.href = "<%= show_path %>";
+        fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+            Swal.fire({
+            title: "Good job!",
+            text: data.message,
+            icon: "success"
+            }).then(() => {
+            window.location.href = "<%= show_path %>";
+            });
+        } else {
+            Swal.fire({
+            title: "Oops...",
+            text: data.message,
+            icon: "error"
+            });
+        }
+        })
+        .catch(error => {
+        console.error('Error:', error);
         });
-      } else {
-        Swal.fire({
-          title: "Oops...",
-          text: data.message,
-          icon: "error"
-        });
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
     });
-  });
 </script>
 
