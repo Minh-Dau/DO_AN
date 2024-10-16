@@ -20,6 +20,9 @@ class SessionsController < ApplicationController
       render json: { success: false, message: 'Email không tồn tại.' }, status: :unprocessable_entity
     end
   end
+
+
+  
   def show
     firebase = FirebaseService.new
   

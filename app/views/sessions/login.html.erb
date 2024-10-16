@@ -122,7 +122,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Quên mật khẩu? Nhấn vào <a href="/quenmatkhau">đây</a></td>
+                        <td colspan="2"> Quên mật khẩu? Nhấn vào <a href="<%= quenmatkhau_path %>">đây</a></td>
                     </tr>
                     <tr>
                         <td colspan="2"> <button type="submit" id="nhan">Đăng Nhập</button></td>
@@ -137,6 +137,7 @@
             </div>
         <% end %>
     </form>
+    <%= render "footer"%>
 </body>
 </html>
 <script>

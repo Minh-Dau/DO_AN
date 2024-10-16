@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       render json: { success: false, message: "Lỗi kiểm tra email: #{e.message}" }, status: :unprocessable_entity
       return
     end
-
+    
     user_data = {
       id: SecureRandom.uuid,
       username: params[:username],
